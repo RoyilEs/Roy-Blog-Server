@@ -1,13 +1,11 @@
 package settings_api
 
 import (
+	"Goblog/models/res"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 // SettingsInfoView 视图
 func (SettingsApi) SettingsInfoView(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
-		"event": "SettingsInfoView",
-	})
+	res.ResultFailWithCode(2, c)
 }
