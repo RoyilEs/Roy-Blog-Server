@@ -1,0 +1,21 @@
+mysql:
+  dataBase: blogger
+  userName: root
+  passWord: zxd2839182980.
+  port: 3306
+  driverName: mysql
+  #rm-cn-nwy3e1xba002bryo.rwlb.rds.aliyuncs.com
+  host: 127.0.0.1
+  log_level: dev
+
+logger:
+  level: info
+  prefix: '[Blogger]'
+  director: log
+  show-line: true
+  log-in-console: true
+
+system:
+  host: "0.0.0.0"
+  post: 8080
+  env: dev
