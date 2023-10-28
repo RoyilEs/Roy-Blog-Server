@@ -5,12 +5,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type Group struct {
+	*gin.RouterGroup
+}
+
 func InitRouter() *gin.Engine {
 	gin.SetMode(global.Config.System.Env)
 	router := gin.Default()
-	router.GET("", func(c *gin.Context) {
-		c.String(200, "Hello World!")
-	})
 
+	apiGroup := router.Group("api")
+	routerGroup := Group{apiGroup}
+	// 系统配置api
+	routerGroup.SettingsRouter()
 	return router
 }
