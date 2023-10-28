@@ -3,6 +3,7 @@ package main
 import (
 	"Goblog/core"
 	"Goblog/global"
+	"Goblog/routers"
 )
 
 func main() {
@@ -10,10 +11,11 @@ func main() {
 	core.InitConf()
 	//初始化日志
 	global.Log = core.InitLogger()
-	global.Log.Info("初始化日志成功")
-	global.Log.Error("初始化日志成功")
-	global.Log.Warning("初始化日志成功")
 	//连接数据库
 	global.DB = core.InitGorm()
 
+	router := routers.InitRouter()
+	addr := global.Config.System.Addr()
+	global.Log.Infof("blog is running at: %s", addr)
+	router.Run(addr)
 }

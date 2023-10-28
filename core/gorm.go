@@ -5,15 +5,13 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
-	"log"
 	"time"
 )
 
 func InitGorm() *gorm.DB {
 	//未配置到mysql
 	if global.Config.MySql.Host == "" {
-		//TODO log暂时没写
-		log.Println("未配置mysql, 请配置")
+		global.Log.Warning("未配置mysql, 请配置")
 		return nil
 	}
 	dsn := global.Config.MySql.Dsn()
@@ -30,7 +28,7 @@ func InitGorm() *gorm.DB {
 		Logger: mySqlLogger,
 	})
 	if err != nil {
-		log.Fatalf("[%s] mysql连接错误", dsn)
+		global.Log.Fatalf("[%s] mysql连接错误", dsn)
 	}
 	sqlDB, _ := db.DB()
 	//TODO 设置mysql连接池 自定义配置 需要修改yaml与 conf—mysql
