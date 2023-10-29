@@ -5,13 +5,16 @@ import (
 	"Goblog/global"
 	"fmt"
 	"gopkg.in/yaml.v2"
+	"io/fs"
 	"io/ioutil"
 	"log"
 )
 
+const ConfigFile = "application.yaml"
+
 // InitConf conf初始化读取配置文件
 func InitConf() {
-	const ConfigFile = "application.yaml"
+
 	c := &config.Config{}
 	yamlConf, err := ioutil.ReadFile(ConfigFile)
 	if err != nil {
@@ -25,4 +28,17 @@ func InitConf() {
 	log.Println("config yamlFile InitConf success")
 	//设置到global-config
 	global.Config = c
+}
+
+func SetYaml() (err error) {
+	marshal, err := yaml.Marshal(global.Config)
+	if err != nil {
+		return
+	}
+	err = ioutil.WriteFile(ConfigFile, marshal, fs.ModePerm)
+	if err != nil {
+		return
+	}
+	global.Log.Info("config yamlFile SetYaml success d=====(￣▽￣*)b")
+	return nil
 }
