@@ -21,3 +21,14 @@ site_info:
   title: BloggerRoy
   email: zxd2839182980@163.com
   name: Roy
+jwt:
+  secret: "123456"
+  expires: 48
+  issuer: blogger
+qiniu:
+  access_key: XXX
+  secret_key: XXX
+  bucket: ""
+  cdn: XXX
+  zone: ""
+  size: 5

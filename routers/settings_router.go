@@ -6,6 +6,7 @@ import (
 
 func (router Group) SettingsRouter() {
 	settingApi := api.ApiGroupApp.SettingApi
-	router.GET("settings", settingApi.SettingsInfoView)
+	router.GET("settings/:name", settingApi.SettingsInfoView)
 	router.PUT("settings", settingApi.SettingsInfoUpdateView)
+	router.PUT("settings_qiniu", settingApi.SettingsQiNiuUpdateView)
 }

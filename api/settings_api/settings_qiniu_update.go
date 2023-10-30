@@ -10,27 +10,22 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// SettingsInfoUpdateView 更新
-func (SettingsApi) SettingsInfoUpdateView(c *gin.Context) {
-	var cr config.SiteInfo
+func (SettingsApi) SettingsQiNiuUpdateView(c *gin.Context) {
+	var cr config.QiNiu
 	err := c.ShouldBindJSON(&cr)
 	if err != nil {
 		res.ResultFailWithCode(CODE.ArgumentError, c)
 		return
 	}
-
-	fmt.Println("1====:", global.Config.SiteInfo)
-
+	fmt.Println("1====:", global.Config.QiNiu)
 	//修改
-	global.Config.SiteInfo = cr
+	global.Config.QiNiu = cr
 	err = core.SetYaml()
 	if err != nil {
 		global.Log.Error(err)
 		res.ResultFailWithMsg(err.Error(), c)
 		return
 	}
-	res.ResultOkWithMsg("修改成功", c)
-
-	fmt.Println("2====:", global.Config.SiteInfo)
-
+	res.ResultOkWithMsg("修改成功d=====(￣▽￣*)b", c)
+	fmt.Println("2====:", global.Config.QiNiu)
 }
