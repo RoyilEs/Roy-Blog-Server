@@ -22,7 +22,7 @@ site_info:
   email: zxd2839182980@163.com
   name: Roy
 jwt:
-  secret: "123456"
+  secret: RoyillEs
   expires: 48
   issuer: blogger
 qiniu:

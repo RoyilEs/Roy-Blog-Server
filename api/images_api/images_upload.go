@@ -33,7 +33,9 @@ func (ImageApi) ImageUploadView(c *gin.Context) {
 	}
 	//判断路径是否存在
 	basePath := global.Config.Upload.Path
+	baseSize := global.Config.Upload.Size
 	//pathList := strings.Split(global.Config.Upload.Path, "/")
+	//递归创建 直接判断文件是否存在
 	_, err = os.ReadDir(basePath)
 	if err != nil {
 		//不存在就创建
@@ -50,15 +52,17 @@ func (ImageApi) ImageUploadView(c *gin.Context) {
 		filePath := path.Join(basePath, file.Filename)
 		//判断大小
 		size := float64(file.Size) / float64(1024*1024)
-		if size >= float64(global.Config.Upload.Size) {
+		if size >= float64(baseSize) {
 			resList = append(resList, FileUploadResponse{
 				FileName:  file.Filename,
 				IsSuccess: false,
-				Msg:       fmt.Sprintf("文件大小不能超过%dM, 当前大小为%.2fM", global.Config.Upload.Size, size),
+				Msg:       fmt.Sprintf("文件大小不能超过%dM, 当前大小为%.2fM", baseSize, size),
 			})
 			continue
 		}
+		//存储
 		err := c.SaveUploadedFile(file, filePath)
+
 		if err != nil {
 			global.Log.Error(err)
 			resList = append(resList, FileUploadResponse{
