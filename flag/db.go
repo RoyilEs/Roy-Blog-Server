@@ -8,7 +8,11 @@ import (
 
 func Makemigrations() {
 	var err error
-	global.DB.SetupJoinTable(&models.MenuModel{}, "Banners", &models.BannerModel{})
+	err = global.DB.SetupJoinTable(&models.MenuModel{}, "Banners", &models.BannerModel{})
+	if err != nil {
+		global.Log.Error("[ error ] 生成连表失败", err)
+		return
+	}
 
 	err = global.DB.Set("gorm:table_options", "ENGINE=InnoDB").
 		AutoMigrate(

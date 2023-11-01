@@ -9,4 +9,5 @@ func (router Group) SettingsRouter() {
 	router.GET("settings/:name", settingApi.SettingsInfoView)
 	router.PUT("settings", settingApi.SettingsInfoUpdateView)
 	router.PUT("settings_qiniu", settingApi.SettingsQiNiuUpdateView)
+	router.PUT("settings_jwt", settingApi.SettingsJwtUpdateView)
 }
