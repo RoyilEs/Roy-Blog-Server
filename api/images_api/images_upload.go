@@ -3,11 +3,13 @@ package images_api
 import (
 	"Goblog/global"
 	"Goblog/models/res"
+	"Goblog/utils"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"io/fs"
 	"os"
 	"path"
+	"strings"
 )
 
 type FileUploadResponse struct {
@@ -49,6 +51,20 @@ func (ImageApi) ImageUploadView(c *gin.Context) {
 
 	//遍历获取
 	for _, file := range fileList {
+
+		fileName := file.Filename
+
+		nameList := strings.Split(fileName, ".")
+		//获取后缀 全部小写
+		suffix := strings.ToLower(nameList[len(nameList)-1])
+		if !utils.InList(suffix, global.WhiteImageList) {
+			resList = append(resList, FileUploadResponse{
+				FileName:  file.Filename,
+				IsSuccess: false,
+				Msg:       "不支持的文件类型",
+			})
+			continue
+		}
 		filePath := path.Join(basePath, file.Filename)
 		//判断大小
 		size := float64(file.Size) / float64(1024*1024)
