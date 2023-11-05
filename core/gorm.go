@@ -23,6 +23,8 @@ func InitGorm() *gorm.DB {
 	} else {
 		mySqlLogger = logger.Default.LogMode(logger.Error) //打印sql的错误
 	}
+	//gorm sql日志
+	global.MySqlLog = logger.Default.LogMode(logger.Info)
 
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
 		Logger: mySqlLogger,

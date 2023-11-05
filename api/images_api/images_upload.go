@@ -2,10 +2,12 @@ package images_api
 
 import (
 	"Goblog/global"
+	"Goblog/models"
 	"Goblog/models/res"
 	"Goblog/utils"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"io"
 	"io/fs"
 	"os"
 	"path"
@@ -48,10 +50,10 @@ func (ImageApi) ImageUploadView(c *gin.Context) {
 	}
 
 	var resList []FileUploadResponse
-
 	//遍历获取
 	for _, file := range fileList {
 
+		//获取文件名称
 		fileName := file.Filename
 
 		nameList := strings.Split(fileName, ".")
@@ -76,9 +78,26 @@ func (ImageApi) ImageUploadView(c *gin.Context) {
 			})
 			continue
 		}
+		//获取文件对象
+		fileObj, err := file.Open()
+		if err != nil {
+			global.Log.Error(err)
+		}
+		byteData, _ := io.ReadAll(fileObj)
+		imageHash := utils.Md5(byteData)
+		//去数据库查询这个图片是否存在
+		var bannerModel models.BannerModel
+		err = global.DB.Take(&bannerModel, "hash = ?", imageHash).Error
+		if err == nil {
+			resList = append(resList, FileUploadResponse{
+				FileName:  bannerModel.Path,
+				IsSuccess: false,
+				Msg:       "图片已存在",
+			})
+			continue
+		}
 		//存储
-		err := c.SaveUploadedFile(file, filePath)
-
+		err = c.SaveUploadedFile(file, filePath)
 		if err != nil {
 			global.Log.Error(err)
 			resList = append(resList, FileUploadResponse{
@@ -94,7 +113,12 @@ func (ImageApi) ImageUploadView(c *gin.Context) {
 			IsSuccess: true,
 			Msg:       "上传成功",
 		})
-
+		//图片入库
+		global.DB.Create(&models.BannerModel{
+			Path: filePath,
+			Hash: imageHash,
+			Name: fileName,
+		})
 	}
 	res.ResultOkWithData(resList, c)
 }

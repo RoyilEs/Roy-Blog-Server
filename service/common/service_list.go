@@ -1,0 +1,32 @@
+package common
+
+import (
+	"Goblog/global"
+	"Goblog/models"
+	"gorm.io/gorm"
+)
+
+type Option struct {
+	models.PageInfo
+	Debug bool
+}
+
+// ComList 分页查询
+func ComList[T any](model T, option Option) (list []T, count int64, err error) {
+	//引用sql日志
+	DB := global.DB
+	if option.Debug {
+		DB = global.DB.Session(&gorm.Session{Logger: global.MySqlLog})
+	}
+
+	//查询获得总数
+	count = DB.Debug().Select("id").Find(&list).RowsAffected
+	//分页 获得一共几页
+	offset := (option.Page - 1) * option.Limit
+	if offset < 0 {
+		offset = 0
+	}
+	//分页后查询
+	err = DB.Debug().Limit(option.Limit).Offset(offset).Find(&list).Error
+	return list, count, err
+}

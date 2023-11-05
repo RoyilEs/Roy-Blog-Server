@@ -5,7 +5,7 @@ mysql:
   port: 3306
   driverName: mysql
   host: 127.0.0.1
-  log_Level: ""
+  log_Level: dev
 logger:
   level: info
   prefix: '[Blogger]'
