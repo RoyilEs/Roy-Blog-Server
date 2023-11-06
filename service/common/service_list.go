@@ -18,6 +18,9 @@ func ComList[T any](model T, option Option) (list []T, count int64, err error) {
 	if option.Debug {
 		DB = global.DB.Session(&gorm.Session{Logger: global.MySqlLog})
 	}
+	if option.Sort == "" {
+		option.Sort = "created_at desc" //默认排序 按照时间往前排
+	}
 
 	//查询获得总数
 	count = DB.Debug().Select("id").Find(&list).RowsAffected
@@ -27,6 +30,6 @@ func ComList[T any](model T, option Option) (list []T, count int64, err error) {
 		offset = 0
 	}
 	//分页后查询
-	err = DB.Debug().Limit(option.Limit).Offset(offset).Find(&list).Error
+	err = DB.Debug().Limit(option.Limit).Offset(offset).Order(option.Sort).Find(&list).Error
 	return list, count, err
 }

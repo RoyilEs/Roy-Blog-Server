@@ -13,7 +13,7 @@ var (
 	Log            *logrus.Logger
 	MySqlLog       logger.Interface
 	WhiteImageList = []string{
-		"jgp",
+		"jpg",
 		"png",
 		"jpeg",
 		"ico",

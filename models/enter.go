@@ -7,3 +7,8 @@ type PageInfo struct {
 	Limit int    `form:"limit"`
 	Sort  string `form:"sort"`
 }
+
+// RemoveRequest 删除
+type RemoveRequest struct {
+	IDList []uint `json:"id_list"`
+}
