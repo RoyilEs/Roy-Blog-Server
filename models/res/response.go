@@ -2,6 +2,7 @@ package res
 
 import (
 	CODE "Goblog/models/res/code"
+	"Goblog/utils"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -58,6 +59,11 @@ func ResultFail(data any, msg string, c *gin.Context) {
 
 func ResultFailWithMsg(msg string, c *gin.Context) {
 	Result(ERR, map[string]any{}, msg, c)
+}
+
+func ResultFailWithError(err error, obj any, c *gin.Context) {
+	msg := utils.GetValidMsg(err, obj)
+	ResultFailWithMsg(msg, c)
 }
 
 func ResultFailWithCode(code CODE.ErrorCode, c *gin.Context) {

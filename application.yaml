@@ -25,8 +25,8 @@ jwt:
   secret: RoyillEs
   expires: 48
   issuer: blogger
-qiniu:
-  enable: "false"
+qi_niu:
+  enable: false
   access_key: XXX
   secret_key: XXX
   bucket: ""

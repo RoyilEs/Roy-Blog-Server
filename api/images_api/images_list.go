@@ -30,6 +30,5 @@ func (ImageApi) ImageListView(c *gin.Context) {
 	})
 
 	res.ResultOkWithList(imageList, count, c)
-
 	return
 }

@@ -7,6 +7,6 @@ type Config struct {
 	System   System   `yaml:"system"`
 	SiteInfo SiteInfo `yaml:"site_info"`
 	Jwt      Jwt      `yaml:"jwt"`
-	QiNiu    QiNiu    `yaml:"qiniu"`
+	QiNiu    QiNiu    `yaml:"qi_niu"`
 	Upload   Upload   `yaml:"upload"`
 }
