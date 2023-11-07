@@ -2,11 +2,17 @@ package main
 
 import (
 	"Goblog/core"
+	_ "Goblog/docs"
 	"Goblog/flag"
 	"Goblog/global"
 	"Goblog/routers"
 )
 
+// @title Goblog API文档
+// @version 1.0
+// @description Goblog API文档
+// @host 127.0.0.1:8080
+// @BasePath /
 func main() {
 	//读取配置文件
 	core.InitConf()

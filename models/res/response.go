@@ -14,7 +14,7 @@ type Response struct {
 	Msg  string `json:"msg"`
 }
 
-type listResponse[T any] struct {
+type ListResponse[T any] struct {
 	Count int64 `json:"count"`
 	List  T     `json:"list"`
 }
@@ -42,7 +42,7 @@ func ResultOkWithData(data any, c *gin.Context) {
 }
 
 func ResultOkWithList(list any, count int64, c *gin.Context) {
-	ResultOkWithData(listResponse[any]{
+	ResultOkWithData(ListResponse[any]{
 		Count: count,
 		List:  list,
 	}, c)

@@ -27,8 +27,8 @@ jwt:
   issuer: blogger
 qi_niu:
   enable: false
-  access_key: XXX
-  secret_key: XXX
+  access_key: emdc5BGx_mwdDuP0VXbZlNnwt8QC_8ZLSCOc84zr
+  secret_key: QbrB0ZlRvn1dWl663pO_dNTi17Er711YO3hgNyR7
   bucket: ""
   cdn: XXX
   zone: ""
