@@ -14,14 +14,14 @@ type ImageSort struct {
 }
 
 type MenuRequest struct {
-	MenuTitle     string      `json:"menu_title" binding:"required" msg:"请完善菜单名称"`
-	MenuTitleEn   string      `json:"menu_title_en" binding:"required" msg:"请完善菜单英文名称"`
-	Slogan        string      `json:"slogan"`
-	Abstract      ctype.Array `json:"abstract"`
-	AbstractTime  int         `json:"abstract_time"`                         //切换时间 单位：s
-	BannerTime    int         `json:"banner_time"`                           //切换时间 单位：s
-	Sort          int         `json:"sort" binding:"required" msg:"请输入菜单序号"` //菜单排序序号
-	ImageSortList []ImageSort `json:"image_sort_list"`                       //具体图片的顺序
+	MenuTitle    string      `json:"menu_title" binding:"required" msg:"请完善菜单名称"`
+	MenuTitleEn  string      `json:"menu_title_en" binding:"required" msg:"请完善菜单英文名称"`
+	Slogan       string      `json:"slogan"`
+	Abstract     ctype.Array `json:"abstract"`
+	AbstractTime int         `json:"abstract_time"`                         //切换时间 单位：s
+	BannerTime   int         `json:"banner_time"`                           //切换时间 单位：s
+	Sort         int         `json:"sort" binding:"required" msg:"请输入菜单序号"` //菜单排序序号
+	//ImageSortList []ImageSort `json:"image_sort_list"`                       //具体图片的顺序
 }
 
 func (MenuApi) MenuCreateView(c *gin.Context) {
@@ -50,10 +50,10 @@ func (MenuApi) MenuCreateView(c *gin.Context) {
 		return
 	}
 	//批量入库
-	if len(cr.ImageSortList) == 0 {
-		res.ResultOkWithMsg("菜单添加成功", c)
-		return
-	}
+	//if len(cr.ImageSortList) == 0 {
+	//	res.ResultOkWithMsg("菜单添加成功", c)
+	//	return
+	//}
 	//var menuImageList []models.MenuImageModel
 	//for _, sort := range cr.ImageSortList {
 	//	//TODO 判断imageID 是否真正有这张图片

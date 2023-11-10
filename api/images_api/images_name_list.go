@@ -16,6 +16,5 @@ type ImageResponse struct {
 func (ImageApi) ImageNameListView(c *gin.Context) {
 	var imageList []ImageResponse
 	global.DB.Model(models.BannerModel{}).Select("id", "path", "name").Scan(&imageList)
-
 	res.ResultOkWithData(imageList, c)
 }
