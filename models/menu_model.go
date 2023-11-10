@@ -13,7 +13,7 @@ type MenuModel struct {
 	Slogan       string        `json:"slogan" gorm:"type:varchar(64);comment:菜单标语"`
 	Abstract     ctype.Array   `json:"abstract" gorm:"size:64"`
 	AbstractTime int           `json:"abstract_time"`
-	Banners      []BannerModel `json:"banners" gorm:"many2many:menu_banner_models;joinForeignKey:MenuID;joinReferences:BannerID;comment:菜单图标"`
+	Banners      []BannerModel `json:"banners" gorm:"many2many:menu_image_models;joinForeignKey:MenuID;joinReferences:BannerID;comment:菜单图标"`
 	BannerTime   int           `json:"banner_time"`
 	Sort         int           `json:"sort" gorm:"size:10"`
 }

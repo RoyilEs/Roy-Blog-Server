@@ -22,6 +22,7 @@ func InitRouter() *gin.Engine {
 	// 系统配置api
 	routerGroup.SettingsRouter()
 	routerGroup.ImagesRouter()
-
+	routerGroup.ArticlesRouter()
+	routerGroup.MenusRouter()
 	return router
 }
