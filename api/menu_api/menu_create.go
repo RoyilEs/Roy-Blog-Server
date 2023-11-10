@@ -33,7 +33,12 @@ func (MenuApi) MenuCreateView(c *gin.Context) {
 		return
 	}
 	//重复值判断
-
+	var menuList []models.MenuModel
+	count := global.DB.Find(&menuList, "menu_title = ? or menu_title_en = ?", cr.MenuTitle, cr.MenuTitleEn).RowsAffected
+	if count > 0 {
+		res.ResultFailWithMsg("重复的菜单信息", c)
+		return
+	}
 	//创建Menu数据入库
 	menuModel := models.MenuModel{
 		MenuTitle:    cr.MenuTitle,
