@@ -3,27 +3,39 @@ package flag
 import FLAG "flag"
 
 type Option struct {
-	DB bool
+	DB   bool
+	User string // -u admin -u user
 }
 
 // Parse 解析命令行参数
 func Parse() Option {
 	db := FLAG.Bool("db", false, "初始化数据库")
+	user := FLAG.String("u", "", "创建用户")
 	//解析命令写入注册的flag中
 	FLAG.Parse()
-	return Option{DB: *db}
+	return Option{
+		DB:   *db,
+		User: *user,
+	}
 }
 
+// IsWebStop 是否停止web项目
 func IsWebStop(option Option) bool {
 	if option.DB {
 		return true
 	}
-	return false
+	return true
 }
 
-// 根据命令执行不同的函数
+// SwitchOption 根据命令执行不同的函数
 func SwitchOption(option Option) {
 	if option.DB {
 		Makemigrations()
+		return
 	}
+	if option.User == "admin" || option.User == "user" {
+		CreateUser(option.User)
+		return
+	}
+	FLAG.Usage()
 }

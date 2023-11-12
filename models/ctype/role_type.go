@@ -6,8 +6,8 @@ type Role int
 
 const (
 	PermissionAdmin       Role = 1 //管理员
-	PermissionUser        Role = 2
-	PermissionVisitor     Role = 3
+	PermissionUser        Role = 2 //用户
+	PermissionVisitor     Role = 3 //游客
 	PermissionDisableUser Role = 4 //被禁用
 )
 
