@@ -24,5 +24,6 @@ func InitRouter() *gin.Engine {
 	routerGroup.ImagesRouter()
 	routerGroup.ArticlesRouter()
 	routerGroup.MenuRouter()
+	routerGroup.UserRouter()
 	return router
 }

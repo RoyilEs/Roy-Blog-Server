@@ -23,7 +23,7 @@ site_info:
   name: Roy
 jwt:
   secret: RoyillEs
-  expires: 48
+  expires: 2
   issuer: blogger
 qi_niu:
   enable: false

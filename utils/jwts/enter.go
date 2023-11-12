@@ -21,10 +21,9 @@ type CustomClaims struct {
 	jwt.StandardClaims
 }
 
-var MySecret = []byte(global.Config.Jwt.Secret)
-
 // GenToken 创建 token
 func GenToken(user JwtPayLoad) (string, error) {
+	var MySecret = []byte(global.Config.Jwt.Secret)
 	claim := CustomClaims{
 		user,
 		jwt.StandardClaims{
@@ -38,6 +37,7 @@ func GenToken(user JwtPayLoad) (string, error) {
 
 // ParseToken 解析 token
 func ParseToken(tokenStr string) (*CustomClaims, error) {
+	var MySecret = []byte(global.Config.Jwt.Secret)
 	token, err := jwt.ParseWithClaims(tokenStr, &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
 		return MySecret, nil
 	})
