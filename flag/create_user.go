@@ -50,7 +50,7 @@ func CreateUser(permissions string) {
 	//TODO 正则密码强度
 	//加密密码 hash
 	hashPassword := pwd.HashPassword(password)
-	//判断角色
+	//判断角色 命令行创建 只有 user 和 admin
 	role := ctype.PermissionUser
 	if permissions == "admin" {
 		role = ctype.PermissionAdmin
