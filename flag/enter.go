@@ -1,6 +1,9 @@
 package flag
 
-import FLAG "flag"
+import (
+	FLAG "flag"
+	"github.com/fatih/structs"
+)
 
 type Option struct {
 	DB   bool
@@ -20,11 +23,21 @@ func Parse() Option {
 }
 
 // IsWebStop 是否停止web项目
-func IsWebStop(option Option) bool {
-	if option.DB {
-		return true
+func IsWebStop(option Option) (f bool) {
+	maps := structs.Map(&option)
+	for _, val := range maps {
+		switch v := val.(type) {
+		case string:
+			if v != "" {
+				f = true
+			}
+		case bool:
+			if v == true {
+				f = true
+			}
+		}
 	}
-	return true
+	return
 }
 
 // SwitchOption 根据命令执行不同的函数
@@ -37,5 +50,5 @@ func SwitchOption(option Option) {
 		CreateUser(option.User)
 		return
 	}
-	FLAG.Usage()
+	//FLAG.Usage()
 }
