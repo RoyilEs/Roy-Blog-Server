@@ -3,6 +3,7 @@ package routers
 import "Goblog/api"
 
 func (router Group) UserRouter() {
-	UserApi := api.ApiGroupApp.UserApi
-	router.POST("email_login", UserApi.EmailLoginView)
+	userApi := api.ApiGroupApp.UserApi
+	router.POST("email_login", userApi.EmailLoginView)
+	router.GET("users", userApi.UserListView)
 }
