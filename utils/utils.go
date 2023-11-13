@@ -5,6 +5,7 @@ import (
 	"encoding/hex"
 	"github.com/go-playground/validator/v10"
 	"reflect"
+	"strings"
 )
 
 // InList 是否存在列表里面
@@ -42,4 +43,21 @@ func GetValidMsg(err error, obj any) string {
 		}
 	}
 	return err.Error()
+}
+
+// DesensitizationTel 手机号脱敏
+func DesensitizationTel(tel string) string {
+	if len(tel) != 11 {
+		return ""
+	}
+	return tel[:3] + "****" + tel[7:]
+}
+
+// DesensitizationEmail  邮箱脱敏
+func DesensitizationEmail(email string) string {
+	emailList := strings.Split(email, "@")
+	if len(emailList) != 2 {
+		return ""
+	}
+	return emailList[0][:2] + "******" + emailList[1]
 }

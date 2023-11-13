@@ -22,6 +22,10 @@ func ComList[T any](model T, option Option) (list []T, count int64, err error) {
 		option.Sort = "created_at desc" //默认排序 按照时间往前排
 	}
 
+	if option.Limit == 0 {
+		option.Limit = 10
+	}
+
 	//查询获得总数
 	count = DB.Debug().Select("id").Find(&list).RowsAffected
 	//分页 获得一共几页
