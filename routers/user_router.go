@@ -1,9 +1,13 @@
 package routers
 
-import "Goblog/api"
+import (
+	"Goblog/api"
+	"Goblog/middleware"
+)
 
 func (router Group) UserRouter() {
 	userApi := api.ApiGroupApp.UserApi
 	router.POST("email_login", userApi.EmailLoginView)
-	router.GET("users", userApi.UserListView)
+	router.GET("users", middleware.JwtAuth(), userApi.UserListView)
+	router.PUT("user_update_role", middleware.JwtAdmin(), userApi.UserUpdateRoleView)
 }
