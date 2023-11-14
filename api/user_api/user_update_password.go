@@ -10,8 +10,8 @@ import (
 )
 
 type UpdatePasswordRequest struct {
-	OldPassword string `json:"old_password"` //旧密码
-	NewPassword string `json:"new_password"` //新密码
+	OldPassword string `json:"old_password" binding:"required" msg:"请输入密码"`  //旧密码
+	NewPassword string `json:"new_password" binding:"required" msg:"请输入新密码"` //新密码
 }
 
 // UserUpdatePasswordView 修改登录人的ID

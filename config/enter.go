@@ -9,4 +9,5 @@ type Config struct {
 	Jwt      Jwt      `yaml:"jwt"`
 	QiNiu    QiNiu    `yaml:"qi_niu"`
 	Upload   Upload   `yaml:"upload"`
+	Redis    Redis    `yaml:"redis"`
 }

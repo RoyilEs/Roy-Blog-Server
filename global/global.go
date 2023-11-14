@@ -2,6 +2,7 @@ package global
 
 import (
 	"Goblog/config"
+	"github.com/go-redis/redis"
 	"github.com/sirupsen/logrus"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -23,4 +24,5 @@ var (
 		"webp",
 		"bmp",
 	} //图片白名单
+	Redis *redis.Client
 )
