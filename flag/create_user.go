@@ -2,9 +2,8 @@ package flag
 
 import (
 	"Goblog/global"
-	"Goblog/models"
 	"Goblog/models/ctype"
-	"Goblog/utils/pwd"
+	"Goblog/service/user_ser"
 	"fmt"
 )
 
@@ -33,40 +32,20 @@ func CreateUser(permissions string) {
 
 	fmt.Println(toString())
 
-	//判断逻辑结构
-	//判断用户名是否存在
-	var userModel models.User
-	err := global.DB.Take(&userModel, "username = ?", userName).Error
-	if err == nil {
-		//存在
-		global.Log.Error("用户名已存在,请重新输入")
-		return
-	}
-	//校验两次密码
-	if password != rePassword {
-		global.Log.Error("两次密码不一致,请重新输入")
-		return
-	}
-	//TODO 正则密码强度
-	//加密密码 hash
-	hashPassword := pwd.HashPassword(password)
 	//判断角色 命令行创建 只有 user 和 admin
 	role := ctype.PermissionUser
 	if permissions == "admin" {
 		role = ctype.PermissionAdmin
 	}
-	//头像问题 1.默认 2.随机选择
-	avatar := "/uploads/avatar/头像.png"
 
-	//入库
-	err = global.DB.Create(&models.User{
-		Nickname:   nickName,
-		Username:   userName,
-		Email:      email,
-		Password:   hashPassword,
-		Permission: role,
-		Avatar:     avatar,
-	}).Error
+	//校验两次密码
+	if password != rePassword {
+		global.Log.Error("两次密码不一致,请重新输入")
+		return
+	}
+	//判断逻辑结构
+	//判断用户名是否存在
+	err := user_ser.UserService{}.CreateUser(userName, nickName, password, role, email, "")
 	if err != nil {
 		global.Log.Error(err)
 		return
