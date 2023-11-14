@@ -6,6 +6,7 @@ import (
 	"Goblog/models/res"
 	"Goblog/utils/jwts"
 	"Goblog/utils/pwd"
+	"fmt"
 	"github.com/gin-gonic/gin"
 )
 
@@ -24,7 +25,7 @@ func (UserApi) EmailLoginView(c *gin.Context) {
 	}
 
 	var userModel models.User
-	err = global.DB.Take(&userModel, "username = ? or email = ?", cr.UserName, cr.UserName).Error
+	err = global.DB.Take(&userModel, "username = ? or email = ? or nickname = ?", cr.UserName, cr.UserName, cr.UserName).Error
 	if err != nil {
 		//没找到
 		global.Log.Warn("用户名不存在")
@@ -51,5 +52,5 @@ func (UserApi) EmailLoginView(c *gin.Context) {
 		res.ResultFailWithMsg("token生成失败", c)
 		return
 	}
-	res.ResultOkWithData(token, c)
+	res.ResultOK(token, fmt.Sprintf("用户%s登录成功", userModel.Username), c)
 }
