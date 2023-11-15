@@ -16,7 +16,6 @@ type ArticleRequest struct {
 	Abstract string `json:"abstract"`  //文章介绍
 	Content  string `json:"content"`   //文章内容
 	Category string `json:"category"`  //文章分类
-	Source   string `json:"source"`    //文章来源
 	BannerID uint   `json:"banner_id"` //封面ID
 }
 
