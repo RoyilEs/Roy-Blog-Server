@@ -11,4 +11,5 @@ func (router Group) ArticlesRouter() {
 	router.GET("articles", articleApi.ArticleListView)
 	router.GET("article_content_list", articleApi.ArticleContentListView)
 	router.PUT("articles/:id", articleApi.ArticleUpdateView)
+	router.DELETE("articles", articleApi.ArticleRemoveView)
 }
