@@ -1,8 +1,11 @@
 package routers
 
-import "Goblog/api"
+import (
+	"Goblog/api"
+	"Goblog/middleware"
+)
 
 func (router Group) ArticlesRouter() {
 	articleApi := api.ApiGroupApp.ArticleApi
-	router.POST("articles", articleApi.ArticleUploadView)
+	router.POST("articles", middleware.JwtAuth(), articleApi.ArticleCreateView)
 }

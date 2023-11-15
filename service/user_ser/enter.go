@@ -46,6 +46,7 @@ func (UserService) CreateUser(userName, nickName, password string, permission ct
 		Nickname:   nickName,
 		Username:   userName,
 		Email:      email,
+		Phone:      phone,
 		Password:   hashPassword,
 		Permission: permission,
 		Avatar:     AVATAR,

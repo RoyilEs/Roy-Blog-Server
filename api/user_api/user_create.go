@@ -19,6 +19,7 @@ type UserCreateRequest struct {
 }
 
 func (UserApi) UserCreateView(c *gin.Context) {
+
 	var cr UserCreateRequest
 	if err := c.ShouldBindJSON(&cr); err != nil {
 		res.ResultFailWithError(err, &cr, c)
