@@ -12,18 +12,6 @@ import (
 )
 
 func (UserApi) UserListView(c *gin.Context) {
-	////判断是否是管理员
-	//token := c.Request.Header.Get("token")
-	//if token == "" {
-	//	res.ResultFailWithMsg("未携带token", c)
-	//	return
-	//}
-	//claims, err := jwts.ParseToken(token)
-	//if err != nil {
-	//	res.ResultFailWithMsg("token错误", c)
-	//	return
-	//}
-	//fmt.Println(claims)
 	//断言
 	_claims, _ := c.Get("claims")
 	claims := _claims.(*jwts.CustomClaims)
