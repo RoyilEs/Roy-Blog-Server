@@ -50,7 +50,6 @@ func (ArticleApi) ArticleCreateView(c *gin.Context) {
 	count := global.DB.Take(&bannerModel, "id = ?", bannerID).RowsAffected
 	//不存在
 	if count <= 0 {
-		res.ResultFailWithMsg("没有找到该图片, 已添加默认图片", c)
 		articleModel.BannerID = uint(5)
 		articleModel.BannerPath = bannerPath
 	} else {
