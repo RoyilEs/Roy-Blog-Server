@@ -59,6 +59,7 @@ func (ImageApi) ImageUploadView(c *gin.Context) {
 		nameList := strings.Split(fileName, ".")
 		//获取后缀 全部小写
 		suffix := strings.ToLower(nameList[len(nameList)-1])
+
 		if !utils.InList(suffix, global.WhiteImageList) {
 			resList = append(resList, FileUploadResponse{
 				FileName:  file.Filename,

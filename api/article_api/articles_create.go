@@ -48,12 +48,12 @@ func (ArticleApi) ArticleCreateView(c *gin.Context) {
 	)
 	count := global.DB.Take(&bannerModel, "id = ?", bannerID).RowsAffected
 	//不存在
-	if count <= 0 {
+	if count == 0 {
 		articleModel.BannerID = uint(5)
 		articleModel.BannerPath = bannerPath
 	} else {
 		articleModel.BannerID = bannerID
-		articleModel.BannerPath = bannerModel.Path
+		articleModel.BannerPath = bannerPath
 	}
 
 	err := global.DB.Create(&articleModel).Error
