@@ -4,6 +4,7 @@ import (
 	"crypto/md5"
 	"encoding/hex"
 	"github.com/go-playground/validator/v10"
+	"math/rand"
 	"reflect"
 	"strings"
 )
@@ -60,4 +61,8 @@ func DesensitizationEmail(email string) string {
 		return ""
 	}
 	return emailList[0][:2] + "******" + emailList[1]
+}
+
+func Random(min, max int) int {
+	return rand.Intn(max-min) + min
 }
