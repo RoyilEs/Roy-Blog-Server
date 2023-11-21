@@ -2,6 +2,7 @@ package api
 
 import (
 	"Goblog/api/article_api"
+	"Goblog/api/data_api"
 	"Goblog/api/images_api"
 	"Goblog/api/menu_api"
 	"Goblog/api/settings_api"
@@ -17,6 +18,7 @@ type ApiGroup struct {
 	MenuApi    menu_api.MenuApi
 	UserApi    user_api.UserApi
 	TagApi     tag_api.TagApi
+	DataApi    data_api.DataApi
 }
 
 var ApiGroupApp = new(ApiGroup)
