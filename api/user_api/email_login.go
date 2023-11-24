@@ -46,6 +46,7 @@ func (UserApi) EmailLoginView(c *gin.Context) {
 		Nickname: userModel.Nickname,
 		Role:     int(userModel.Permission),
 		UserID:   userModel.ID,
+		Avatar:   userModel.Avatar,
 	})
 	if err != nil {
 		global.Log.Error("token生成失败", err)
