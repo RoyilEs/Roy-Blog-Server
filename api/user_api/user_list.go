@@ -16,18 +16,23 @@ type UserResponse struct {
 	RoleID int `json:"role_id"`
 }
 
+type UserListRequest struct {
+	models.PageInfo
+	Permission int `json:"permission" form:"permission"`
+}
+
 func (UserApi) UserListView(c *gin.Context) {
 	//断言
 	_claims, _ := c.Get("claims")
 	claims := _claims.(*jwts.CustomClaims)
-	var page models.PageInfo
+	var page UserListRequest
 	if err := c.ShouldBindQuery(&page); err != nil {
 		res.ResultFailWithCode(CODE.ArgumentError, c)
 		return
 	}
 	var users []UserResponse
-	list, count, _ := common.ComList(models.User{}, common.Option{
-		PageInfo: page,
+	list, count, _ := common.ComList(models.User{Permission: ctype.Role(page.Permission)}, common.Option{
+		PageInfo: page.PageInfo,
 	})
 
 	for _, user := range list {
