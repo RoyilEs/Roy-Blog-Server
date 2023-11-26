@@ -116,7 +116,7 @@ func (ImageApi) ImageUploadView(c *gin.Context) {
 		})
 		//图片入库
 		global.DB.Create(&models.BannerModel{
-			Path: filePath,
+			Path: "/" + filePath,
 			Hash: imageHash,
 			Name: fileName,
 		})
