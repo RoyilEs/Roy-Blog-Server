@@ -104,7 +104,7 @@ func (ImageApi) ImageUploadView(c *gin.Context) {
 			resList = append(resList, FileUploadResponse{
 				FileName:  file.Filename,
 				IsSuccess: false,
-				Msg:       "上传失败" + err.Error(),
+				Msg:       "图片上传失败" + err.Error(),
 			})
 			continue
 		}
@@ -112,7 +112,7 @@ func (ImageApi) ImageUploadView(c *gin.Context) {
 		resList = append(resList, FileUploadResponse{
 			FileName:  filePath,
 			IsSuccess: true,
-			Msg:       "上传成功",
+			Msg:       "图片上传成功",
 		})
 		//图片入库
 		global.DB.Create(&models.BannerModel{

@@ -34,7 +34,7 @@ qi_niu:
   zone: ""
   size: 5
 upload:
-  size: 2
+  size: 5
   path: uploads/file
 redis:
   ip: 127.0.0.1

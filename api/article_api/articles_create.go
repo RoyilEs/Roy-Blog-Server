@@ -9,6 +9,7 @@ import (
 	"Goblog/utils/jwts"
 	"github.com/gin-gonic/gin"
 	"strconv"
+	"unicode/utf8"
 )
 
 type ArticleRequest struct {
@@ -37,23 +38,22 @@ func (ArticleApi) ArticleCreateView(c *gin.Context) {
 		Category: cr.Category,
 		UserID:   claims.UserID,
 		Source:   claims.Username,
-		Word:     strconv.Itoa(len(cr.Content)),
+		Word:     strconv.Itoa(utf8.RuneCountInString(cr.Content)),
 		Nickname: claims.Nickname,
 	}
 
 	var (
 		bannerModel models.BannerModel
-		bannerPath  = user_ser.AVATAR
 		bannerID    = cr.BannerID
 	)
 	count := global.DB.Take(&bannerModel, "id = ?", bannerID).RowsAffected
 	//不存在
 	if count == 0 {
 		articleModel.BannerID = uint(5)
-		articleModel.BannerPath = bannerPath
+		articleModel.BannerPath = user_ser.AVATAR
 	} else {
 		articleModel.BannerID = bannerID
-		articleModel.BannerPath = bannerPath
+		articleModel.BannerPath = bannerModel.Path
 	}
 
 	err := global.DB.Create(&articleModel).Error

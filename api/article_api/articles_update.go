@@ -4,6 +4,7 @@ import (
 	"Goblog/global"
 	"Goblog/models"
 	"Goblog/models/res"
+	"fmt"
 	"github.com/fatih/structs"
 	"github.com/gin-gonic/gin"
 )
@@ -15,7 +16,8 @@ func (ArticleApi) ArticleUpdateView(c *gin.Context) {
 		res.ResultFailWithError(err, &cr, c)
 		return
 	}
-	id := c.Param("id")
+	id := c.Query("id")
+	fmt.Println(id)
 	//更新
 	var articleModel models.ArticleModel
 	var bannerModel models.BannerModel
