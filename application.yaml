@@ -23,7 +23,7 @@ site_info:
   name: Roy
 jwt:
   secret: RoyillEs
-  expires: 2
+  expires: 48
   issuer: blogger
 qi_niu:
   enable: false
@@ -36,6 +36,7 @@ qi_niu:
 upload:
   size: 5
   path: uploads/file
+  path_avatar: uploads/avatar
 redis:
   ip: 127.0.0.1
   port: 6379

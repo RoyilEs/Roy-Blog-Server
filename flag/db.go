@@ -24,6 +24,7 @@ func Makemigrations() {
 			&models.MenuModel{},
 			&models.LoginDataModels{},
 			&models.AnosuAll{},
+			&models.AvatarModel{},
 		)
 	if err != nil {
 		global.Log.Error("[error] 生成数据库表结构失败", err)

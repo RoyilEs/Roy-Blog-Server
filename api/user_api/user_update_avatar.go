@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// UserAvatar TODO 上传头像
 type UserAvatar struct {
 	UserID uint `json:"user_id" binding:"required" msg:"用户ID错误"`
 }
