@@ -21,6 +21,7 @@ type MenuRequest struct {
 	AbstractTime int         `json:"abstract_time" structs:"abstract_time"`                //切换时间 单位：s
 	BannerTime   int         `json:"banner_time" structs:"banner_time"`                    //切换时间 单位：s
 	Sort         int         `json:"sort" binding:"required" msg:"请输入菜单序号" structs:"sort"` //菜单排序序号
+	Path         string      `json:"path" structs:"path" binding:"required" msg:"请填写菜单路径"`
 	//ImageSortList []ImageSort `json:"image_sort_list"`                       //具体图片的顺序
 }
 

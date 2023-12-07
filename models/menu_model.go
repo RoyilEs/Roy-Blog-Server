@@ -10,6 +10,7 @@ type MenuModel struct {
 	gorm.Model
 	MenuTitle    string        `json:"menu_title" gorm:"type:varchar(32);comment:菜单名称"`
 	MenuTitleEn  string        `json:"menu_title_en" gorm:"type:varchar(32);comment:菜单名称(en)"`
+	Path         string        `json:"path" gorm:"type:varchar(64);comment:菜单路径"`
 	Slogan       string        `json:"slogan" gorm:"type:varchar(64);comment:菜单标语"`
 	Abstract     ctype.Array   `json:"abstract" gorm:"size:64"`
 	AbstractTime int           `json:"abstract_time"`

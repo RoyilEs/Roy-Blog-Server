@@ -11,10 +11,11 @@ type MenuNameResponse struct {
 	ID          uint   `json:"id"`
 	MenuTitle   string `json:"menu_title"`
 	MenuTitleEn string `json:"menu_title_en"`
+	Path        string `json:"path"`
 }
 
 func (MenuApi) MenuNameListView(c *gin.Context) {
 	var menuNameList []MenuNameResponse
-	global.DB.Model(models.MenuModel{}).Select("id", "menu_title", "menu_title_en").Scan(&menuNameList)
+	global.DB.Model(models.MenuModel{}).Select("id", "menu_title", "menu_title_en", "path").Scan(&menuNameList)
 	res.ResultOkWithData(menuNameList, c)
 }
