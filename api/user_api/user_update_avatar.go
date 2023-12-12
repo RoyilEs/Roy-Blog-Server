@@ -17,6 +17,7 @@ type FileUploadResponse struct {
 
 const AvatarPath = "/uploads/avatar"
 
+// UserUpdateAvatarView TODO 历史遗留代码头像更改
 // UserUpdateAvatarView 用户头像变更
 func (UserApi) UserUpdateAvatarView(c *gin.Context) {
 	//file, err := c.FormFile("image")

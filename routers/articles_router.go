@@ -11,6 +11,6 @@ func (router Group) ArticlesRouter() {
 	router.GET("articles", articleApi.ArticleListView)
 	router.GET("article_content_list", articleApi.ArticleContentListView)
 	router.GET("article_content_detail/:id", articleApi.ArticleContentDetailView)
-	router.PUT("articles", articleApi.ArticleUpdateView)
-	router.DELETE("articles", articleApi.ArticleRemoveView)
+	router.PUT("articles", middleware.JwtAdmin(), articleApi.ArticleUpdateView)
+	router.DELETE("articles", middleware.JwtAdmin(), articleApi.ArticleRemoveView)
 }

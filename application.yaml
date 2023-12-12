@@ -1,7 +1,7 @@
 mysql:
   dataBase: blogger
   userName: root
-  passWord: zxd2839182980.
+  passWord: root
   port: 3306
   driverName: mysql
   host: 127.0.0.1
