@@ -35,7 +35,7 @@ func (MenuApi) MenuCreateView(c *gin.Context) {
 	}
 	//重复值判断
 	var menuList []models.MenuModel
-	count := global.DB.Find(&menuList, "menu_title = ? or menu_title_en = ?", cr.MenuTitle, cr.MenuTitleEn).RowsAffected
+	count := global.DB.Find(&menuList, "menu_title = ? or menu_title_en = ? or path = ?", cr.MenuTitle, cr.MenuTitleEn, cr.Path).RowsAffected
 	if count > 0 {
 		res.ResultFailWithMsg("重复的菜单信息", c)
 		return
@@ -49,11 +49,19 @@ func (MenuApi) MenuCreateView(c *gin.Context) {
 		AbstractTime: cr.AbstractTime,
 		BannerTime:   cr.BannerTime,
 		Sort:         cr.Sort,
+		Path:         cr.Path,
 	}
 	err = global.DB.Create(&menuModel).Error
 	if err != nil {
 		res.ResultFailWithMsg("菜单添加失败", c)
 		return
+	}
+
+	if cr.BannerTime == 0 {
+		cr.BannerTime = 7
+	}
+	if cr.AbstractTime == 0 {
+		cr.AbstractTime = 7
 	}
 	//批量入库
 	//if len(cr.ImageSortList) == 0 {

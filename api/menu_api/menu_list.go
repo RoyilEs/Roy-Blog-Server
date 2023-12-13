@@ -1,9 +1,10 @@
 package menu_api
 
 import (
-	"Goblog/global"
 	"Goblog/models"
 	"Goblog/models/res"
+	CODE "Goblog/models/res/code"
+	"Goblog/service/common"
 	"github.com/gin-gonic/gin"
 )
 
@@ -12,18 +13,21 @@ type MenuResponse struct {
 }
 
 func (MenuApi) MenuListView(c *gin.Context) {
-	//先查询菜单
-	var menuList []models.MenuModel
-	var menuIDList []uint
-	global.DB.Order("sort desc").Find(&menuList).Select("id").Scan(&menuIDList)
 
-	var menus []MenuResponse
-	for _, model := range menuList {
-		//model就是一个菜单
-		menus = append(menus, MenuResponse{
-			MenuModel: model,
-		})
+	var cr models.PageInfo
+	err := c.ShouldBindQuery(&cr)
+	if err != nil {
+		res.ResultFailWithCode(CODE.ArgumentError, c)
+		return
 	}
-	res.ResultOkWithData(menus, c)
+
+	menuList, count, err := common.ComList(&models.MenuModel{}, common.Option{
+		PageInfo: cr,
+		Debug:    false,
+	})
+	if err != nil {
+		return
+	}
+	res.ResultOkWithList(menuList, count, c)
 	return
 }
