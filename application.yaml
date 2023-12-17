@@ -37,6 +37,7 @@ upload:
   size: 5
   path: uploads/file
   path_avatar: uploads/avatar
+  size_avatar: 2
 redis:
   ip: 127.0.0.1
   port: 6379

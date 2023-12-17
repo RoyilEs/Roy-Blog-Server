@@ -12,6 +12,7 @@ func (router Group) UserRouter() {
 	router.GET("users", middleware.JwtAuth(), userApi.UserListView)
 	router.PUT("user_update_role", middleware.JwtAdmin(), userApi.UserUpdateRoleView)
 	router.PUT("user_update_password", middleware.JwtAuth(), userApi.UserUpdatePasswordView)
+	router.PUT("user_update_avatar", middleware.JwtAuth(), userApi.UserUpdateAvatarView)
 	router.POST("logout", middleware.JwtAuth(), userApi.LogoutView)
 	router.DELETE("users", middleware.JwtAdmin(), userApi.UserRemoveView)
 
