@@ -26,7 +26,7 @@ jwt:
   expires: 48
   issuer: blogger
 qi_niu:
-  enable: false
+  enable: "false"
   access_key: emdc5BGx_mwdDuP0VXbZlNnwt8QC_8ZLSCOc84zr
   secret_key: QbrB0ZlRvn1dWl663pO_dNTi17Er711YO3hgNyR7
   bucket: ""
@@ -35,11 +35,16 @@ qi_niu:
   size: 5
 upload:
   size: 5
+  size_avatar: 2
   path: uploads/file
   path_avatar: uploads/avatar
-  size_avatar: 2
 redis:
   ip: 127.0.0.1
   port: 6379
-  password: "redis"
+  password: redis
   pool_size: 100
+admin:
+  username: Roy
+  avatar: uploads/avatar/Roy摸鱼.png
+  github: ""
+  bilibili: ""

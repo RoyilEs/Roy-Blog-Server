@@ -2,6 +2,7 @@ package routers
 
 import (
 	"Goblog/api"
+	"Goblog/middleware"
 )
 
 func (router Group) ImagesRouter() {
@@ -12,6 +13,7 @@ func (router Group) ImagesRouter() {
 	router.GET("image_get_https", imagesApi.ImageGetHttpsView)
 	router.GET("anosu_one", imagesApi.AnosuOneVie)
 	router.GET("imageAll_one", imagesApi.ImageAllGetOneView)
-	router.DELETE("images", imagesApi.ImageRemoveView)
-	router.PUT("images", imagesApi.ImageUpdateView)
+	router.GET("images_one", imagesApi.ImageGetOneView)
+	router.DELETE("images", middleware.JwtAdmin(), imagesApi.ImageRemoveView)
+	router.PUT("images", middleware.JwtAuth(), imagesApi.ImageUpdateView)
 }

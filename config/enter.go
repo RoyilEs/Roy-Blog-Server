@@ -10,4 +10,5 @@ type Config struct {
 	QiNiu    QiNiu    `yaml:"qi_niu"`
 	Upload   Upload   `yaml:"upload"`
 	Redis    Redis    `yaml:"redis"`
+	Admin    Admin    `yaml:"admin"`
 }
